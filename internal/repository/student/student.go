@@ -24,8 +24,8 @@ func (student StudentRepository) Create(ctx context.Context, user entities.Creat
 	if err != nil {
 		return 0, err
 	}
-	row := transaction.QueryRowContext(ctx, `insert into student (name, login, hashed_password, level) values ($1, $2, $3, $4) returning id;`,
-		user.Name, user.Login, user.Password, user.Level)
+	row := transaction.QueryRowContext(ctx, `insert into student (name, login, hashed_password, level, tg) values ($1, $2, $3, $4, $5) returning id;`,
+		user.Name, user.Login, user.Password, user.Level, user.TG)
 	err = row.Scan(&id)
 	if err != nil {
 		return 0, err
@@ -38,8 +38,8 @@ func (student StudentRepository) Create(ctx context.Context, user entities.Creat
 
 func (student StudentRepository) Get(ctx context.Context, studentID int) (*entities.Student, error) {
 	var user entities.Student
-	row := student.db.QueryRowContext(ctx, `select name, login, level from student where id = $1`, studentID)
-	err := row.Scan(&user.Name, &user.Login, &user.Level)
+	row := student.db.QueryRowContext(ctx, `select name, login, level, tg from student where id = $1`, studentID)
+	err := row.Scan(&user.Name, &user.Login, &user.Level, &user.TG)
 	if err != nil {
 		return nil, err
 	}

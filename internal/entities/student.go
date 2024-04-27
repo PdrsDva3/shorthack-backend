@@ -4,6 +4,7 @@ type StudentBase struct {
 	Login string `json:"login"`
 	Name  string `json:"name"`
 	Level string `json:"level"`
+	TG    string `json:"tg"`
 }
 
 type CreateStudent struct {
