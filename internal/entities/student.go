@@ -1,18 +1,23 @@
 package entities
 
 type StudentBase struct {
-	login string `json:"login"`
-	name  string `json:"name"`
-	level string `json:"level"`
+	Login string `json:"login"`
+	Name  string `json:"name"`
+	Level string `json:"level"`
 }
 
 type CreateStudent struct {
 	StudentBase
-	hashed_password string `json:"hashed_password"`
+	Password string `json:"password"`
+}
+
+type StudentLogin struct {
+	Login    string `json:"login"`
+	Password string `json:"password"`
 }
 
 type Student struct {
 	StudentBase
-	mentors   []int `json:"mentors"`
+	MentorIds []int `json:"mentorids"`
 	StudentId int   `json:"id"`
 }

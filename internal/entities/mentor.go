@@ -1,19 +1,24 @@
 package entities
 
 type MentorBase struct {
-	name  string `json:"name"`
-	login string `json:"login"`
+	Name  string `json:"name"`
+	Login string `json:"login"`
 }
 
 type MentorCreate struct {
 	MentorBase
-	hashed_password string `json:"hashed_password"`
+	Password string `json:"hashed_password"`
+}
+
+type MentorLogin struct {
+	Login    string `json:"login"`
+	Password string `json:"password"`
 }
 
 type Mentor struct {
 	MentorBase
-	MentorID  int      `json:"id"`
-	StudentID []int    `json:"student_id"`
-	level     string   `json:"level"`
-	knowledge []string `json:"knowledge"`
+	MentorID   int    `json:"id"`
+	StudentIDs []int  `json:"studentids"`
+	Level      string `json:"level"`
+	Tags       []int  `json:"tags"`
 }
