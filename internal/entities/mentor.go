@@ -5,7 +5,7 @@ type MentorBase struct {
 	Login string `json:"login"`
 }
 
-type MentorCreate struct {
+type CreateMentor struct {
 	MentorBase
 	Password string `json:"hashed_password"`
 }
@@ -18,7 +18,17 @@ type MentorLogin struct {
 type Mentor struct {
 	MentorBase
 	MentorID   int    `json:"id"`
-	StudentIDs []int  `json:"studentids"`
+	StudentIDs []int  `json:"student_ids"`
 	Level      string `json:"level"`
 	Tags       []int  `json:"tags"`
+}
+
+type AddNewTag struct {
+	MentorID int    `json:"id"`
+	Tag      string `json:"new_tag"`
+}
+
+type AddTagMt struct {
+	MentorID int `json:"id"`
+	TagId    int `json:"tag_id"`
 }

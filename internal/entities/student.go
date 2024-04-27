@@ -21,3 +21,8 @@ type Student struct {
 	MentorIds []int `json:"mentorids"`
 	StudentId int   `json:"id"`
 }
+
+type AddTagSt struct {
+	StudentId int `json:"id"`
+	TagId     int `json:"tag_id"`
+}
