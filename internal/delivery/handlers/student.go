@@ -44,3 +44,26 @@ func (p PublicHandler) CreateUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"id": id})
 }
+
+// @Summary Add tag
+// @Tags public
+// @Accept  json
+// @Produce  json
+// @Param data body entities.AddTagSt true "Tag add"
+// @Success 200 {object} int "Successfully add tag"
+// @Failure 400 {object} map[string]string "Invalid input"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /student/addtag [post]
+func (p PublicHandler) AddTag(c *gin.Context) {
+	var addTag entities.AddTagSt
+
+	if err := c.ShouldBindJSON(&addTag); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx := c.Request.Context()
+
+	id := p.service.AddTag(ctx, addTag.TagId, addTag.StudentId)
+	c.JSON(http.StatusOK, gin.H{"id": id})
+}

@@ -22,9 +22,12 @@ func (usrs StudentService) GetMe(ctx context.Context, studentID int, span trace.
 	panic("implement me")
 }
 
-func (usrs StudentService) AddTag(ctx context.Context, studentID int, sessionID string, tag string) error {
-	//TODO implement me
-	panic("implement me")
+func (usrs StudentService) AddTag(ctx context.Context, studentID int, tag int) error {
+	err := usrs.StudentRepository.AddTag(ctx, studentID, tag)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (usrs StudentService) AddMentor(ctx context.Context, mentorID int, studentID int, sessionID string) error {

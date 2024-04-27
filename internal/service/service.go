@@ -15,6 +15,6 @@ type StudentServ interface {
 	GetMe(ctx context.Context, studentID int, span trace.Span) (entities.Student, error)
 	Delete(ctx context.Context, studentID int) error
 
-	AddTag(ctx context.Context, studentID int, sessionID string, tag string) error
+	AddTag(ctx context.Context, studentID int, tag int) error
 	AddMentor(ctx context.Context, mentorID int, studentID int, sessionID string) error
 }
