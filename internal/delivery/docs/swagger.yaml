@@ -1,4 +1,11 @@
 definitions:
+  entities.AddTagSt:
+    properties:
+      id:
+        type: integer
+      tag_id:
+        type: integer
+    type: object
   entities.CreateStudent:
     properties:
       level:
@@ -15,6 +22,39 @@ definitions:
 info:
   contact: {}
 paths:
+  /student/addtag:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Tag add
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entities.AddTagSt'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully add tag
+          schema:
+            type: integer
+        "400":
+          description: Invalid input
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Add tag
+      tags:
+      - public
   /student/create:
     post:
       consumes:
