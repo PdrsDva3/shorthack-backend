@@ -23,3 +23,6 @@ go.work
 .env
 config.go
 .idea
+
+go.mod
+go.sum
