@@ -53,6 +53,7 @@ func (student StudentRepository) Get(ctx context.Context, studentID int) (*entit
 		}
 		mentors = append(mentors, idMentor)
 	}
+	user.MentorIds = mentors
 
 	err = rows.Err()
 	if err != nil {
