@@ -1,0 +1,51 @@
+definitions:
+  entities.CreateStudent:
+    properties:
+      level:
+        type: string
+      login:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      tg:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /student/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User create
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entities.CreateStudent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully created user, returning JWT and Session
+          schema:
+            type: integer
+        "400":
+          description: Invalid input
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create user
+      tags:
+      - public
+swagger: "2.0"
