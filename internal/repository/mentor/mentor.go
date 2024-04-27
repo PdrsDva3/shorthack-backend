@@ -142,25 +142,25 @@ func (Mentor MentorRepository) AddTag(ctx context.Context, MentorID int, tagID i
 	return nil
 }
 
-func (mentor MentorRepository) AddNewTag(ctx context.Context, MentorID int, tag string) error {
+func (mentor MentorRepository) AddNewTag(ctx context.Context, MentorID int, tag string) (int, error) {
 	var tagID int
 	transaction, err := mentor.db.BeginTxx(ctx, nil)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	row := transaction.QueryRowxContext(ctx, `INSERT INTO tags (text) values ($1) RETURNING id;`, tag)
 
 	if err := row.Scan(&tagID); err != nil {
-		return err
+		return 0, err
 	}
 
 	transaction.QueryRowContext(ctx, `insert into user_tag (id_mentor, id_student, id_tag) values ($1, $2, $3);`,
 		MentorID, 0, tagID)
 
 	if err := transaction.Commit(); err != nil {
-		return err
+		return 0, err
 	}
-	return nil
+	return tagID, nil
 
 }
