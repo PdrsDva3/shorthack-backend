@@ -12,7 +12,7 @@ type MentorRepository interface {
 	UpdatePassword(ctx context.Context, studentID int, newPassword string) error
 	Delete(ctx context.Context, studentID int) error
 	AddTag(ctx context.Context, mentorID int, tagID int) error
-	AddNewTag(ctx context.Context, mentorID int, tag string) error
+	AddNewTag(ctx context.Context, mentorID int, tag string) (int, error)
 }
 
 type StudentRepository interface {
@@ -21,6 +21,6 @@ type StudentRepository interface {
 	GetPassword(ctx context.Context, login string) (int, string, error)
 	UpdatePassword(ctx context.Context, studentID int, newPassword string) error
 	Delete(ctx context.Context, studentID int) error
-	AddMentor(ctx context.Context, studentID int, mentor entities.Mentor) (int, error)
+	AddMentor(ctx context.Context, studentID int, mentorID int) error
 	AddTag(ctx context.Context, studentID int, tagID int) error
 }
