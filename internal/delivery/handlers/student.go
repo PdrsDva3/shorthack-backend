@@ -64,7 +64,7 @@ func (p PublicHandler) AddTag(c *gin.Context) {
 
 	ctx := c.Request.Context()
 
-	err := p.service.AddTag(ctx, addTag.TagId, addTag.StudentId)
+	err := p.service.AddTag(ctx, addTag)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
